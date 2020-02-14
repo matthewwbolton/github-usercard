@@ -87,19 +87,28 @@ function createCard(obj){
     p5 = document.createElement('p'),
     p6 = document.createElement('p');
 
+    
+
+
     card.classList.add('card');
     cardInfo.classList.add('card-info');
     name.classList.add('name');
     p1.classList.add('username');
 
+    
+    // card.append(img, cardInfo);
+    // cardInfo.append(name, p1,p2,p3,p4,p5,p6);
+    // cardInfo.append(a);
+   
 
+    
     card.appendChild(img);
     card.appendChild(cardInfo);
     cardInfo.appendChild(name);
     cardInfo.appendChild(p1);
     cardInfo.appendChild(p2);
     cardInfo.appendChild(p3);
-    p3.appendChild(a);
+    
     cardInfo.appendChild(p4);
     cardInfo.appendChild(p5);
     cardInfo.appendChild(p6);
@@ -110,11 +119,13 @@ function createCard(obj){
     p2.textContent = `Location: ${obj.location}`;
     p3.textContent = `Profile:`;
     a.href = obj.html_url;
-    a.textContent = `${obj.html_url}`;
+    a.textContent = obj.html_url;
     p4.textContent = `Followers: ${obj.followers}`;
     p5.textContent = `Following: ${obj.following}`;
     p6.textContent = `Bio: ${obj.bio}`;
 
+  p3.appendChild(a);  
+  
     return card;
 
   };
