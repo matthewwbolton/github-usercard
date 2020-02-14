@@ -24,7 +24,18 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [`matthewwbolton`, `cgiroux86`, `tetondan`, `dustinmyers`, `justsml`, `luishrd`, `bigknell`];
+
+followersArray.forEach(elem => {
+  axios.get(`https://api.github.com/users/${elem}`)
+    .then(response => {
+      console.log(response.data)
+      cards.appendChild(createCard(response.data));
+    })
+    .catch(err => {
+      console.log(err)
+    });
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +64,72 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+// axios.get('https://api.github.com/users/matthewwbolton')
+//   .then(response => {
+//     console.log(response.data)
+//     cards.appendChild(createCard(response.data));
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   });
+
+function createCard(obj){
+  const card = document.createElement('div'),
+    img = document.createElement('img'),
+    cardInfo = document.createElement('div'),
+    name = document.createElement('h3'),
+    p1 = document.createElement('p'),
+    p2 = document.createElement('p'),
+    p3 = document.createElement('p'),
+    a = document.createElement('a'),
+    p4 = document.createElement('p'),
+    p5 = document.createElement('p'),
+    p6 = document.createElement('p');
+
+    
+
+
+    card.classList.add('card');
+    cardInfo.classList.add('card-info');
+    name.classList.add('name');
+    p1.classList.add('username');
+
+    
+    // card.append(img, cardInfo);
+    // cardInfo.append(name, p1,p2,p3,p4,p5,p6);
+    // cardInfo.append(a);
+   
+
+    
+    card.appendChild(img);
+    card.appendChild(cardInfo);
+    cardInfo.appendChild(name);
+    cardInfo.appendChild(p1);
+    cardInfo.appendChild(p2);
+    cardInfo.appendChild(p3);
+    
+    cardInfo.appendChild(p4);
+    cardInfo.appendChild(p5);
+    cardInfo.appendChild(p6);
+
+    img.src = obj.avatar_url;
+    name.textContent = obj.name;
+    p1.textContent = obj.login;
+    p2.textContent = `Location: ${obj.location}`;
+    p3.textContent = `Profile:`;
+    a.href = obj.html_url;
+    a.textContent = obj.html_url;
+    p4.textContent = `Followers: ${obj.followers}`;
+    p5.textContent = `Following: ${obj.following}`;
+    p6.textContent = `Bio: ${obj.bio}`;
+
+  p3.appendChild(a);  
+  
+    return card;
+
+  };
+
+  const cards = document.querySelector('.cards');
+  
+
